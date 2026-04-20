@@ -21,7 +21,7 @@ public class DataBaseUtils {
     @Step("Fetch admin credentials from DB")
     public static AdminCredentials getAdminCredentials() {
 
-        String query = "SELECT * FROM loginUser WHERE id = 2";
+        String query = "SELECT * FROM loginUser WHERE id = 7";
 
         try (
                 Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
