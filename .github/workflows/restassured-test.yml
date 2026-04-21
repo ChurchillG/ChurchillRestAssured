@@ -133,3 +133,4 @@ jobs:
             Kind Regards,
             Team Lead
 
+          attachments: target/surefire-reports/emailable-report.html
