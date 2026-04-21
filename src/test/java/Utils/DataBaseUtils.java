@@ -8,14 +8,20 @@ import java.sql.ResultSet;
 
 public class DataBaseUtils {
 
-
-    private static final String URL = System.getProperty("db.url",
+    // Read from environment variables first (for CI/CD like GitHub Actions)
+    private static final String URL = System.getenv("DB_URL") != null
+            ? System.getenv("DB_URL")
+            : System.getProperty("db.url",
             "jdbc:mysql://102.222.124.22:3306/ndosian6b8b7_teaching");
 
-    private static final String USER = System.getProperty("db.user",
+    private static final String USER = System.getenv("DB_USERNAME") != null
+            ? System.getenv("DB_USERNAME")
+            : System.getProperty("db.user",
             "ndosian6b8b7_teaching");
 
-    private static final String PASSWORD = System.getProperty("db.password",
+    private static final String PASSWORD = System.getenv("DB_PASSWORD") != null
+            ? System.getenv("DB_PASSWORD")
+            : System.getProperty("db.password",
             "^{SF0a=#~[~p)@l1");
 
     @Step("Fetch admin credentials from DB")
@@ -27,8 +33,6 @@ public class DataBaseUtils {
                 Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
                 PreparedStatement stmt = con.prepareStatement(query)
         ) {
-
-            //stmt.setString(2, "ADMIN");
 
             try (ResultSet rs = stmt.executeQuery()) {
 
